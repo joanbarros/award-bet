@@ -15,4 +15,7 @@
 /log/*
 !/log/.keep
 /tmp
+<<<<<<< HEAD
 /vendor
+=======
+>>>>>>> 9ff6c6262919464c5d1f792d34e361cffad20c8d
