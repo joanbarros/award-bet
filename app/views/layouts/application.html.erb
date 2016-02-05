@@ -13,29 +13,37 @@
 
   <body>
 
+
     <div class="top-bar">
         <div class="top-bar-left">
           <ul class="dropdown menu" data-dropdown-menu>
             <li class="menu-text">Awards Bets <span class="alert round label">beta</span></li>
-
-            <li><%= link_to "Awards", "/" %></li>
-
-            <li><%= link_to "My Bets", "/mybets" %></li>
-
-            <li><%= link_to "Configuration", "/configuration" %></li>
-
-            
-
           </ul>
         </div>
+
+
+
+
+
+
+      <% if @show_topbar %>
         <div class="top-bar-right">
           <ul class="menu">
-            <li><button type="button" class="button">Logout</button></li>
+
+              <li><%= link_to "Awards", "/" %></li>
+
+              <li><%= link_to "My Bets", "/mybets" %></li>
+
+              <li><%= link_to "Configuration", "/configuration" %></li>
+              <li>  <%= link_to "Logout", "/login", class: "alert button"%>
+            </li>
           </ul>
         </div>
+            <% end %>
       </div>
 
     <%= yield %>
+
 
   </body>
 </html>

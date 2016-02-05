@@ -1,11 +1,20 @@
 Rails.application.routes.draw do
+  get 'login/index'
+
   get 'mybets/index'
 
   get 'awards/index'
 
+
+
+
   get '/configuration', to: 'configuration#index'
 
   get '/mybets', to: 'mybets#index'
+
+  get "login", to: 'login#index'
+
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
