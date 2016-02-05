@@ -5,6 +5,6 @@ class AwardsController < ApplicationController
 
   def index
     @show_topbar = true
-    @logued_user = current_user.sent_messages.all
+    #@logued_user = current_user.sent_messages.all
   end
 end

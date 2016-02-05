@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>
-    <%= content_for?(:title) ? yield(:title) : "Untitled" %>
+    <%= content_for?(:title) ? yield(:title) : "Awards Bets" %>
   </title>
 
   <%= stylesheet_link_tag    "application" %>
@@ -48,11 +48,9 @@
           </li>
 
           <li>
-            <a href="#"> Users </a>
-          </li>
+            <!--<%= link_to "Logout", "/login", class: "alert button hollow"%>-->
 
-          <li>
-            <%= link_to "Logout", "/login", class: "alert button hollow"%>
+            <%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "alert button hollow" %>
           </li>
 
 
