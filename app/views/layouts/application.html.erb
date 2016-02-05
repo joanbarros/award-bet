@@ -1,49 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <%= stylesheet_link_tag    "application" %>
+  <title>
+    <%= content_for?(:title) ? yield(:title) : "Untitled" %>
+  </title>
+
+  <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-  </head>
+      <%= csrf_meta_tags %>
+</head>
 
-  <body>
-
-
-    <div class="top-bar">
-        <div class="top-bar-left">
-          <ul class="dropdown menu" data-dropdown-menu>
-            <li class="menu-text">Awards Bets <span class="alert round label">beta</span></li>
-          </ul>
-        </div>
+<body>
 
 
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <ul class="dropdown menu" data-dropdown-menu>
+        <li class="menu-text">Awards Bets
+          <span class="alert round label">beta</span>
+        </li>
+      </ul>
+    </div>
 
 
 
 
-      <% if @show_topbar %>
-        <div class="top-bar-right">
-          <ul class="menu">
 
-              <li><%= link_to "Awards", "/" %></li>
 
-              <li><%= link_to "My Bets", "/mybets" %></li>
+    <% if @show_topbar %>
+      <div class="top-bar-right">
+        <ul class="menu">
 
-              <li><%= link_to "Configuration", "/configuration" %></li>
-              <li>  <%= link_to "Logout", "/login", class: "alert button"%>
-            </li>
-          </ul>
-        </div>
-            <% end %>
+          <li>
+            <%= link_to "Awards", "/" %>
+          </li>
+
+          <li>
+            <%= link_to "My Bets", "/mybets" %>
+          </li>
+
+          <li>
+            <%= link_to "Configuration", "/configuration" %>
+          </li>
+          <li>
+            <%= link_to "Logout", "/login", class: "alert button"%>
+          </li>
+        </ul>
       </div>
+      <% end %>
+  </div>
 
-    <%= yield %>
+  <%= yield %>
 
 
-  </body>
+</body>
+
 </html>
