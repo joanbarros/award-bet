@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
+  get 'mybets/index'
+
   get 'awards/index'
+
+  get '/configuration', to: 'configuration#index'
+
+  get '/mybets', to: 'mybets#index'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
