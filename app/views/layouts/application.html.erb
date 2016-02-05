@@ -39,13 +39,17 @@
             <%= link_to "Awards", "/" %>
           </li>
 
-          <li>
+          <li style="margin-right:5em;">
             <%= link_to "My Bets", "/mybets" %>
           </li>
 
-          <li>
+          <!--<li>
             <%= link_to "Configuration", "/configuration" %>
-          </li>
+          </li>-->
+
+         <li>
+         <span style="margin-right:1em;"><%= current_user.email %></span>
+         </li>
 
           <li>
             <!--<%= link_to "Logout", "/login", class: "alert button hollow"%>-->
