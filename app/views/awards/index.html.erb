@@ -1,106 +1,17 @@
-
-
 <% if current_user.admin %>
 <div class="row" style="margin-top:2em;margin-bottom:1em;">
-  <div class="large-offset-10 large-2 columns">
-    <a data-open="create_new_award_reveal" class="button success large">Create Award</a>
+  <div class="small-offset-10 small-2 columns">
+   <%=  link_to("Create Award", new_award_path, remote: true, class: "button success large") %>
+   <!--<a data-open="create_new_award_reveal" class="button success large">Create Award</a>-->
   </div>
 </div>
 <% end %>
 
-
-
-
-
-
-<% @awards.each do |award| %>
-<div class="row">
-  <a href="#">
-    <div class="large-12 columns">
-      <div class="row">
-        <div class="large-12 columns">
-          <h1><%= award.name %></h1>
-          <% if current_user.admin %>
-            <a class="button">Edit</a>
-            <!--<a class="button alert hollow" data-open="confirm_delete_award">Delete</a>-->
-            <%= link_to award, remote: true,  method: :delete, data: { confirm: "are you sure?"} do  %>
-              <button class="button alert hollow">Delete</button>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="large-12 columns">
-          <p><%= award.description %>
-          </p>
-        </div>
-      </div>
-      <div class="row">
-        <div id="days_left_award" class="large-4 columns">
-          <p>
-            closing date: <%= award.closing_date %></p>
-        </div>
-        <div id="pool_award" class="large-4 columns">
-          Pool: $0.00
-        </div>
-        <div class="large-4 columns">
-         <% if award.active %>
-          <span class="success round label">open</span>
-        <% else %>
-          <span class="alert round label">closed</span>
-        <% end %>
-
-          <!--<span class="secondary round label">unlimited pool</span>-->
-        </div>
-
-      </div>
-    </div>
-  </a>
-</div>
-<% end %>
-
-
-
-
-
-<div class="reveal" id="create_new_award_reveal" data-reveal>
-  <h3>New Award</h3>
-
-
-    <%= form_for @award, remote: true, url: {action: "create"} do |f| %>
-    <label> name
-     <%= f.text_field :name %>
-   </label>
-   <label>Description
-     <%= f.text_area :description %>
-   </label>
-
-<label>
-  Active
-  <%= f.check_box :active %>
-</label>
-<label>
-  Closing date
-  <%= f.datetime_local_field :closing_date %>
-</label>
-
-     <%= f.submit "Save", :class => "button large" %>
-
-  <% end %>
-
-  <button class="close-button" data-close aria-label="close reveal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
-
-
+<div id="awards">
+  <%= render @awards %>
 </div>
 
-
-
-<div class="reveal" id="confirm_delete_award" data-reveal>
-  <h3>Are you sure?</h3>
-  <%= link_to "Delete", @award, :method => :destroy , :class => "button alert" %>
-  <button class="close-button" data-close aria-label="close reveal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
+<div class="new_award">
 </div>
+
+<%= render 'dialog' %>

@@ -17,3 +17,23 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
+$(document).ajaxError(function(event, xhr, options, exec){
+
+console.log(xhr.responseText);
+console.log('exec->' + exec);
+
+
+
+  var errors = JSON.parse(xhr.responseText);
+  var dd = "<div class='callout alert'><ul>";
+
+  for(var i = 0; i < errors.length; i++){
+    var list = errors[i];
+    dd += "<li>" + list + "</li>";
+  }
+  dd += "</ul></div>";
+  $("#error_explanation").html(dd);
+
+
+});
