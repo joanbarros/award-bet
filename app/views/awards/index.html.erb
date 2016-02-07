@@ -8,13 +8,18 @@
 </div>
 <% end %>
 
-<div class="row">
 
+
+
+
+
+<% @awards.each do |anAward| %>
+<div class="row">
   <a href="#">
     <div class="large-12 columns">
       <div class="row">
         <div class="large-12 columns">
-          <h1>Oscars 2016</h1>
+          <h1><%= anAward.name %></h1>
           <%if current_user.admin %>
           <a class="button">Edit</a>
           <a class="button alert hollow" data-open="confirm_delete_award">Delete</a>
@@ -23,63 +28,68 @@
       </div>
       <div class="row">
         <div class="large-12 columns">
-          <p>The 88th Academy Awards ceremony, presented by the Academy of Motion Picture Arts and Sciences, will honor the best films of 2015 and will take place on February 28, 2016.
+          <p><%= anAward.description %>
           </p>
         </div>
       </div>
       <div class="row">
         <div id="days_left_award" class="large-4 columns">
           <p>
-            34 days left</p>
+            closing date: <%= anAward.closing_date %></p>
         </div>
         <div id="pool_award" class="large-4 columns">
-          Pool: $13,500.00
+          Pool: $0.00
         </div>
         <div class="large-4 columns">
+         <% if anAward.active %>
           <span class="success round label">open</span>
-          <span class="secondary round label">unlimited pool</span>
+        <% else %>
+          <span class="alert round label">closed</span>
+        <% end %>
+
+          <!--<span class="secondary round label">unlimited pool</span>-->
         </div>
 
       </div>
     </div>
   </a>
 </div>
+<% end %>
+
 
 
 
 
 <div class="reveal" id="create_new_award_reveal" data-reveal>
   <h3>New Award</h3>
-  <form>
-    <label> Name
-      <input id="award_name" type="text" />
-    </label>
-    <label>
-      Description
-      <textarea id="award_description" type="text" rows="10"></textarea>
-    </label>
-    <label>
-      Active
-      <div class="switch large">
-       <input class="switch-input" id="yes-no" type="checkbox" name="exampleSwitch">
-       <label class="switch-paddle" for="yes-no">
-         <span class="show-for-sr">Award is active?</span>
-         <span class="switch-active" aria-hidden="true">Yes</span>
-         <span class="switch-inactive" aria-hidden="true">No</span>
-       </label>
-     </div>
-    </label>
 
-    <label>
-      Closing date
-      <input id="award_closing_date" type="datetime-local" />
-    </label>
 
-    <button class="button success large" id="award_save">Save</button>
-  </form>
+    <%= form_for @award, remote: true, url: {action: "create"} do |f| %>
+    <label> name
+     <%= f.text_field :name %>
+   </label>
+   <label>Description
+     <%= f.text_area :description %>
+   </label>
+
+<label>
+  Active
+  <%= f.check_box :active %>
+</label>
+<label>
+  Closing date
+  <%= f.datetime_local_field :closing_date %>
+</label>
+
+     <%= f.submit "Save", :class => "button large" %>
+
+  <% end %>
+
   <button class="close-button" data-close aria-label="close reveal" type="button">
     <span aria-hidden="true">&times;</span>
   </button>
+
+
 </div>
 
 
