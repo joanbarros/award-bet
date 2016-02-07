@@ -1,13 +1,13 @@
 class AwardsController < ApplicationController
 
   before_filter :authenticate_user!
-  before_action :all_awards, only: [:index, :create]
+  before_action :all_awards, only: [:index, :create, :destroy, :update]
   respond_to :html, :js
 
 
   def index
     @show_topbar = true
-    @award = Award.new 
+    @award = Award.new
     @awards = Award.all
   end
 
@@ -18,16 +18,18 @@ end
 
 
 def all_awards
-  @awareds = Award.all
+  @awards = Award.all
 end
 
 def award_params
-  params.require(:award).permit(:name, :description, :closing_date, :active)
+  params.require(:award).permit(:id, :name, :description, :closing_date, :active)
 end
 
  def create
+   @show_topbar = true
   #@awards = Award.all
    @award = Award.create(award_params)
+   render "awards/index"
  end
 
 
@@ -43,12 +45,13 @@ end
 
 def delete
   @award = Award.find(params[:award_id])
+    @award.destroy
 end
 
-def detroy
-  @awards = Award.all
+def destroy
   @award = Award.find(params[:id])
   @award.destroy
+  @awards = Award.all
 end
 
 

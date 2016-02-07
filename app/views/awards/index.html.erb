@@ -13,35 +13,38 @@
 
 
 
-<% @awards.each do |anAward| %>
+<% @awards.each do |award| %>
 <div class="row">
   <a href="#">
     <div class="large-12 columns">
       <div class="row">
         <div class="large-12 columns">
-          <h1><%= anAward.name %></h1>
-          <%if current_user.admin %>
-          <a class="button">Edit</a>
-          <a class="button alert hollow" data-open="confirm_delete_award">Delete</a>
+          <h1><%= award.name %></h1>
+          <% if current_user.admin %>
+            <a class="button">Edit</a>
+            <!--<a class="button alert hollow" data-open="confirm_delete_award">Delete</a>-->
+            <%= link_to award, remote: true,  method: :delete, data: { confirm: "are you sure?"} do  %>
+              <button class="button alert hollow">Delete</button>
+            <% end %>
           <% end %>
         </div>
       </div>
       <div class="row">
         <div class="large-12 columns">
-          <p><%= anAward.description %>
+          <p><%= award.description %>
           </p>
         </div>
       </div>
       <div class="row">
         <div id="days_left_award" class="large-4 columns">
           <p>
-            closing date: <%= anAward.closing_date %></p>
+            closing date: <%= award.closing_date %></p>
         </div>
         <div id="pool_award" class="large-4 columns">
           Pool: $0.00
         </div>
         <div class="large-4 columns">
-         <% if anAward.active %>
+         <% if award.active %>
           <span class="success round label">open</span>
         <% else %>
           <span class="alert round label">closed</span>
@@ -96,8 +99,7 @@
 
 <div class="reveal" id="confirm_delete_award" data-reveal>
   <h3>Are you sure?</h3>
-  <button class="button alert">Yes</button>
-
+  <%= link_to "Delete", @award, :method => :destroy , :class => "button alert" %>
   <button class="close-button" data-close aria-label="close reveal" type="button">
     <span aria-hidden="true">&times;</span>
   </button>

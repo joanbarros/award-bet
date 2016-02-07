@@ -47,6 +47,14 @@
             <%= link_to "Configuration", "/configuration" %>
           </li>-->
 
+
+          <% if current_user.admin %>
+            <li>
+              <a href="/dashboard">Dashboard</a>
+            </li>
+          <% end %>
+
+
          <li>
          <span style="margin-right:1em;"><%= current_user.email %></span>
          </li>
