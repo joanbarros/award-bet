@@ -8,9 +8,7 @@
           <h1><%= award.name %></h1>
         </a>-->
 
-        <h1><%= link_to "#{award.name}", :controller => :category, :action => :index, award_id: award.id, award_name: award.name %></h1>
-
-
+        <h1><%= link_to "#{award.name}", :controller => :categories, :action => :index, award_id: award.id, award_name: award.name %></h1>
 
         <% if current_user.admin %>
           <%= link_to "Edit", edit_award_path(award), remote: true, :class => 'button' %>

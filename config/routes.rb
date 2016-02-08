@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   get 'dashboard/index'
 
-  get 'category/index'
+  get 'categories/index'
 
   get '/configuration', to: 'configuration#index'
 
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   get "/dashboard", to: 'dashboard#index'
 
   #get "/category/[:id]", to: 'category#index'
-  get "/category", to: "category#index"
+  get "/categories", to: "categories#index"
 
 
 

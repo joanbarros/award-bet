@@ -45,7 +45,8 @@
 // ---------
 
 $global-font-size: 100%;
-$global-width: rem-calc(1200);
+//$global-width: rem-calc(1200);
+$global-width: rem-calc(800);
 $global-lineheight: 1.5;
 $primary-color: #2199e8;
 $secondary-color: #777;
@@ -513,7 +514,8 @@ $thumbnail-margin-bottom: $global-margin;
 $thumbnail-shadow: 0 0 0 1px rgba($black, 0.2);
 $thumbnail-shadow-hover: 0 0 6px 1px rgba($primary-color, 0.5);
 $thumbnail-transition: box-shadow 200ms ease-out;
-$thumbnail-radius: $global-radius;
+//$thumbnail-radius: $global-radius;
+$thumbnail-radius: 10em;
 
 // 33. Title Bar
 // -------------

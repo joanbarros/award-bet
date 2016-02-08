@@ -1,0 +1,36 @@
+<div id="category_<%= category.id%>" class="row" style='margin-bottom:2em;'>
+
+  <div class="small-12 small-centered columns">
+
+    <div class="row">
+      <div class="small-12 columns">
+        <h3><%= category.name %></h3>
+        <% if current_user.admin %>
+        <%= link_to "Edit", edit_category_path(category), remote: true, :class => 'button small' %>
+        <%= link_to "Delete", category, remote: true, :method => :delete , data: {confirm: "Are you sure"}, :class => "button hollow alert small"%>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 columns">
+        <p><%= category.description %>
+        </p>
+      </div>
+    </div>
+
+    <div class="row small-up-1 medium-up-2 large-up-4">
+      <div class="column">
+        <img style="max-heigth:100px; max-width:100px;" class="thumbnail" src="https://upload.wikimedia.org/wikipedia/en/e/ee/Unknown-person.gif" alt="nomee name">
+      </div>
+
+     <div class="column">
+       <% if current_user.admin %>
+       <!--<%= link_to "Add", edit_category_path(category), remote: true, :class => 'button' %>-->
+       <a href="#" class="button small"><i class="fi-plus"></i></a>
+       <% end %>
+     </div>
+
+    </div>
+  </div>
+
+</div>
