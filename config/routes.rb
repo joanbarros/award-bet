@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'category/index'
+
   devise_for :users
   get 'login/index'
 
@@ -6,8 +8,9 @@ Rails.application.routes.draw do
 
   get 'awards/index'
 
+  get 'dashboard/index'
 
-
+  get 'category/index'
 
   get '/configuration', to: 'configuration#index'
 
@@ -15,8 +18,18 @@ Rails.application.routes.draw do
 
   get "login", to: 'login#index'
 
+  get "/dashboard", to: 'dashboard#index'
+
+  #get "/category/[:id]", to: 'category#index'
+  get "/category", to: "category#index"
+
+
 
 resources :awards
+
+resources :categories
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
