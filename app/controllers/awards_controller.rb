@@ -9,6 +9,8 @@ class AwardsController < ApplicationController
   end
 
   def show
+    @show_topbar = true
+    @award = Award.find(params[:id])
   end
 
   def new
@@ -21,7 +23,7 @@ class AwardsController < ApplicationController
    respond_to do |format|
      if @award.save
        format.json { head :no_content }
-       format.js 
+       format.js
        format.html
      else
        format.json {render json: @award.errors.full_messages, status: :unprocessable_entity}
@@ -63,7 +65,7 @@ def set_award
 end
 
 def award_params
-  params.require(:award).permit(:id, :name, :description, :closing_date, :active)
+  params.require(:award).permit( :name, :description, :closing_date, :active)
 end
 
 

@@ -3,9 +3,10 @@
   <div class="small-12 small-centered columns">
     <div class="row">
       <div class="small-12 columns">
-        <a>
+        <a href="awards/<%= award.id %>">
           <h1><%= award.name %></h1>
         </a>
+        
         <% if current_user.admin %>
           <%= link_to "Edit", edit_award_path(award), remote: true, :class => 'button' %>
           <%= link_to "Delete", award, remote: true, :method => :delete , data: {confirm: "Are you sure"}, :class => "button hollow alert"%>
