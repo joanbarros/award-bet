@@ -10,6 +10,9 @@
   Description
   <%= f.text_field :description %>
 </label>
+<div class="row">
+  <div class="small-offset-7 small-5 columns">
 <%= f.submit @category.new_record? ? "Create Category" : "Update Category", :class => "button large success" %>
-
+</div>
+</div>
 <% end %>

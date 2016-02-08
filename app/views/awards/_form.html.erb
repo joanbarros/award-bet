@@ -20,7 +20,9 @@
   Closing date
   <%= f.datetime_local_field :closing_date %>
 </label>
-
+<div class="row">
+  <div class="small-offset-8 small-4 columns">
 <%= f.submit @award.new_record? ? "Create Award" : "Update Award", :class => "button large success" %>
-
+</div>
+</div>
 <% end %>

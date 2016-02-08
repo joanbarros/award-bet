@@ -1,4 +1,4 @@
-<div id="category_<%= category.id%>" class="row" style='margin-bottom:2em;'>
+<div id="category_<%= category.id%>" class="row" style='margin-bottom:3.2em;'>
 
   <div class="small-12 small-centered columns">
 
@@ -23,19 +23,56 @@
       </div>
     </div>
 
-    <div class="row small-up-1 medium-up-2 large-up-4 align-middle">
-      <div class="column">
-        <img style="max-heigth:100px; max-width:100px;" class="thumbnail" src="https://upload.wikimedia.org/wikipedia/en/e/ee/Unknown-person.gif" alt="nomee name">
+
+<!-- nominees -->
+    <div class="row">
+
+      <div class="column small-4" style="background-color:#f9f9f9;border-radius:1em;">
+        <div class="row">
+          <div class="small-12 small-centered columns" style="text-align:center">
+            <img style="max-heigth:140px; max-width:140px; margin-top:1em;" class="thumbnail" src="https://upload.wikimedia.org/wikipedia/en/e/ee/Unknown-person.gif" alt="nomee name">
+        </div>
+        <div class="row">
+          <div class="small-12 columns small-centered" style="text-align:center">
+            <h5>Nominee name</h3>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="small-12 columns small-centered" style="text-align:center">
+            <button class="button tiny"><i class="fi-pencil"></i></button>
+            <button class="button tiny alert hollow"><i class="fi-x"></i></button>
+          </div>
+        </div>
+
+       <div class="row">
+         <div class="small-12 columns small-centered" style="text-align:center">
+           <button class="button tiny">Place Bet</button>
+           <button class="button tiny alert">Unplace Bet</button>
+        </div>
       </div>
 
-     <div class="column">
+    </div>
+      </div>
+
+     <div class="column small-4">
+       <div row>
+         <div class="small-12 columns" style="text-align:center">
        <% if current_user.admin %>
        <!--<%= link_to "Add", edit_category_path(category), remote: true, :class => 'button' %>-->
        <a style="border-radius:100em;" href="#" class="button small radius large"><i  class="fi-plus"></i></a>
        <% end %>
      </div>
+   </div>
+     </div>
 
     </div>
+
+<!-- end nominees -->
+
+
+
+
   </div>
 
 </div>
