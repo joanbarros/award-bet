@@ -1,35 +1,45 @@
 <div id="award_<%= award.id%>" class="row">
 
-  <div class="small-12 small-centered columns">
+  <div class="columns">
     <div class="row">
-      <div class="small-12 columns">
+      <div class="columns small-12">
 
         <!--<a href="awards/<%= award.id %>">
           <h1><%= award.name %></h1>
         </a>-->
 
-        <h1><%= link_to "#{award.name}", :controller => :categories, :action => :index, award_id: award.id, award_name: award.name %></h1>
+        <h1><%= link_to "#{award.name}", :controller => :categories, :action => :index, award_id: award.id, award_name: award.name %>
 
         <% if current_user.admin %>
-          <%= link_to "Edit", edit_award_path(award), remote: true, :class => 'button' %>
-          <%= link_to "Delete", award, remote: true, :method => :delete , data: {confirm: "Are you sure"}, :class => "button hollow alert"%>
+          <%= link_to  edit_award_path(award), remote: true, :class => 'button tiny' do %>
+            <i class="fi-pencil"></i>
+          <% end %>
+
+          <%= link_to  award, remote: true, :method => :delete , data: {confirm: "Are you sure"}, :class => "button hollow alert tiny" do%>
+           <i class="fi-x"></i>
+          <% end %>
 
         <% end %>
+
+        </h1>
+
+
       </div>
     </div>
+
     <div class="row">
-      <div class="small-12 columns">
+      <div class="columns small-12">
         <p><%= award.description %>
         </p>
       </div>
     </div>
     <div class="row">
-      <div id="days_left_award" class="large-4 columns">
+      <div id="days_left_award" class="small-4 columns">
         <p>
           closing date:
           <%= award.closing_date %></p>
       </div>
-      <div id="pool_award" class="large-4 columns">
+      <div id="pool_award" class="small-4 columns">
         Pool: $0.00
       </div>
       <div class="small-4 columns">

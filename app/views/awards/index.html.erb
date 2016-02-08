@@ -1,13 +1,13 @@
 <% if current_user.admin %>
-<div class="row" style="margin-top:2em;margin-bottom:1em;">
-  <div class="small-offset-10 small-2 columns">
+<div class="row align-right" style="margin-top:3em;">
+  <div class="columns small-offset-9 small-3">
    <%=  link_to("Create Award", new_award_path, remote: true, class: "button success") %>
    <!--<a data-open="create_new_award_reveal" class="button success large">Create Award</a>-->
   </div>
 </div>
 <% end %>
 
-<div id="awards">
+<div id="awards" style="margin-top:2em;">
   <%= render @awards %>
 </div>
 
