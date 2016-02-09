@@ -3,11 +3,21 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   respond_to :html, :js
 
+  @@award_id = 0
+
   def index
     @show_topbar = true
     @award_name = params[:award_name]
-    @categories = Category.find_by award_id: params[:award_id]
-    @categories = Category.all if @categories.nil?
+    @@award_id = params[:award_id]
+    @categories = Category.where(award_id: params[:award_id])
+    #@categories = Category.find_each award_id: (params[:award_id]).to_i
+    #@categories = Category.all if @categories.nil?
+
+
+
+    @nominees = Nominee.where(:category_id => @categories.pluck(:id))
+
+
   end
 
   def show
@@ -21,7 +31,7 @@ class CategoriesController < ApplicationController
 
   def create
     @show_topbar = true
-    @category = Category.create(category_params)
+    @category = Category.create(category_params.merge!(award_id: @@award_id))
     respond_to do |format|
       if @category.save
         format.json { head :no_content }
@@ -38,7 +48,7 @@ class CategoriesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @category.update(category_params)
+      if @category.update(category_params.merge!(award_id: @@award_id))
         format.json { head :no_content }
         format.js { render layout: false }
       else
@@ -63,6 +73,6 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:name, :description, :id)
+    params.require(:category).permit(:name, :description, :id, :award_id)
   end
 end

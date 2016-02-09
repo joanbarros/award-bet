@@ -1,0 +1,18 @@
+<%= form_for(@nominee, remote: true, :html=> {:role => "form"}) do |f| %>
+<div id="error_explanation" style="font-size:0.8em;">
+</div>
+
+<label>
+  Name
+  <%= f.text_field :name  %>
+</label>
+<label>
+  Description
+  <%= f.text_field :image_url %>
+</label>
+<div class="row">
+  <div class="small-offset-7 small-5 columns">
+<%= f.submit @nominee.new_record? ? "Create Nominee" : "Update Nominee", :class => "button large success" %>
+</div>
+</div>
+<% end %>
