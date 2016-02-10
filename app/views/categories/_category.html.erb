@@ -26,16 +26,12 @@
     <!-- nominees -->
     <div id="new_nominee"></div>
 
-    <div id="nominees" class="row">
+    <div id="nominees" class="row align-stretch">
 
       <%= render :partial => 'nominee', :collection => @nominees = Nominee.where(category_id: category.id) %>
 
       <% if current_user.admin %>
-      <div class="column small-4">
-        <div row>
-
-
-          <div class="small-12 columns" style="text-align:center">
+      <div class="small-12 large-expand medium-expand columns">
 
             <!--<%= link_to "Add", edit_category_path(category), remote: true, :class => 'button' %>-->
             <!--<a style="border-radius:100em;" href="#" class="button small radius large"><i  class="fi-plus"></i></a>-->
@@ -44,8 +40,7 @@
             <% end %>
 
           </div>
-        </div>
-      </div>
+
       <% end %>
 
     </div>

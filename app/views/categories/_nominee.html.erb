@@ -1,8 +1,10 @@
-<% logger.debug ">>>>>@nominee #{nominee.inspect}" %>
+
 <% if nominee.nil? == false %>
-<div id="nominee_<%= nominee.id %>" class="column small-4" style="background-color:#f9f9f9;border-radius:1em; margin:0.4em;">
+<div id="nominee_<%= nominee.id %>" class="small-12 large-expand medium-expand columns" style="background-color:#f9f9f9;border-radius:0.7em; margin:0.4em;">
+
   <div class="row">
-    <div class="small-12 small-centered columns" style="text-align:center">
+
+    <div class="column small-12">
 
       <% if nominee.image_url.nil? || nominee.image_url.empty? %>
       <img style="heigth:140px; width:140px; margin-top:1em;" class="thumbnail" src="https://upload.wikimedia.org/wikipedia/en/e/ee/Unknown-person.gif" alt="nomee name">
@@ -12,23 +14,19 @@
 
 
     </div>
+
+  </diV>
+
     <div class="row">
-      <div class="small-12 columns small-centered" style="text-align:center">
-        <h4><%= nominee.name %></h4>
+      <div class="column small-12">
+        <h5><%= nominee.name %></h5>
       </div>
     </div>
 
     <div class="row">
-      <div class="small-12 columns small-centered" style="text-align:center">
-
-        <!--<button class="button tiny">
-          <i class="fi-pencil"></i>
-        </button>
-        <button class="button tiny alert hollow">
-          <i class="fi-x"></i>
-        </button>-->
 
         <% if current_user.admin %>
+        <div class="column small-4">
         <%= link_to edit_nominee_category_path(nominee.id,:nominee_id => nominee.id,
                                                             :nominee_name => nominee.name,
                                                             :nominee_description => nominee.description,
@@ -37,24 +35,27 @@
                                                             :method => :put, :class => 'button tiny' do %>
         <i class="fi-pencil"></i>
         <% end %>
+        </div>
+        <div class="column small-4">
         <%= link_to destroy_nominee_category_path(nominee.id,:nominee_id => nominee.id), remote: true, :method => :delete , data: {confirm: "Are you sure"}, :class => "button hollow alert tiny" do%>
         <i class="fi-x"></i>
         <% end %>
+        </div>
         <% end %>
 
-
-      </div>
     </div>
-
 
 
     <div class="row">
-      <div class="small-12 columns small-centered" style="text-align:center">
+      <div class="column small-4" >
         <button class="button tiny">Place Bet</button>
+      </div>
+      <div class="column small-4">
         <button class="button tiny alert">Unplace Bet</button>
       </div>
+
     </div>
 
   </div>
-</div>
+
 <% end %>
