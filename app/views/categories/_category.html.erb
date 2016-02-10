@@ -5,14 +5,14 @@
     <div class="row">
       <div class="small-12 columns">
         <h3><%= category.name %>
-        <% if current_user.admin %>
+          <% if current_user.admin %>
           <%= link_to edit_category_path(category), remote: true, :class => 'button tiny' do %>
-           <i class="fi-pencil"></i>
+          <i class="fi-pencil"></i>
           <% end %>
           <%= link_to  category, remote: true, :method => :delete , data: {confirm: "Are you sure"}, :class => "button hollow alert tiny" do%>
           <i class="fi-x"></i>
           <% end %>
-        <% end %>
+          <% end %>
         </h3>
       </div>
     </div>
@@ -23,42 +23,39 @@
       </div>
     </div>
 
+    <!-- nominees -->
+    <div id="new_nominee"></div>
 
-<!-- nominees -->
-  <div id="new_nominee">
+    <div id="nominees" class="row">
 
-  </div>
-<div id="nominees" class="row">
+      <%= render :partial => 'nominee', :collection => @nominees =Nominee.where(category_id: category.id) %>
 
-
-<% if current_user.admin %>
-<div class="column small-4">
-    <div row>
-      <div class="small-12 columns" style="text-align:center">
-
-    <!--<%= link_to "Add", edit_category_path(category), remote: true, :class => 'button' %>-->
-    <!--<a style="border-radius:100em;" href="#" class="button small radius large"><i  class="fi-plus"></i></a>-->
-    <%= link_to new_nominee_path(), remote: true, :class => "button large" ,:style => "border-radius:100em;" do %>
-    <i  class="fi-plus"></i>
-    <% end %>
+      <% if current_user.admin %>
+      <div class="column small-4">
+        <div row>
 
 
-  </div>
-  </div>
-  </div>
-<% end %>
+          <div class="small-12 columns" style="text-align:center">
 
+            <!--<%= link_to "Add", edit_category_path(category), remote: true, :class => 'button' %>-->
+            <!--<a style="border-radius:100em;" href="#" class="button small radius large"><i  class="fi-plus"></i></a>-->
+            <%= link_to new_nominee_category_path(category.id,:category_id => category.id), remote: true, :class => "button large" ,:style => "border-radius:100em;"    do %>
+            <i class="fi-plus"></i>
+            <% end %>
 
-</div>
+          </div>
+        </div>
+      </div>
+      <% end %>
 
-
-
-<%= render :partial => '/nominees/dialog_nominee' %>
-
-<!-- end nominees -->
+    </div>
 
 
 
+
+    <%= render :partial => 'dialog_nominee' %>
+
+    <!-- end nominees -->
 
   </div>
 

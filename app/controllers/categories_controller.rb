@@ -4,20 +4,19 @@ class CategoriesController < ApplicationController
   respond_to :html, :js
 
   @@award_id = 0
+  @@category_id = 0
 
   def index
     @show_topbar = true
     @award_name = params[:award_name]
     @@award_id = params[:award_id]
     @categories = Category.where(award_id: params[:award_id])
-    #@categories = Category.find_each award_id: (params[:award_id]).to_i
-    #@categories = Category.all if @categories.nil?
+    # @categories = Category.find_each award_id: (params[:award_id]).to_i
+    # @categories = Category.all if @categories.nil?
 
+    @nominees = Nominee.where(category_id: @categories.pluck(:id))
 
-
-    @nominees = Nominee.where(:category_id => @categories.pluck(:id))
-
-
+    logger.debug ">>-->> @nominees = #{@nominees}"
   end
 
   def show
@@ -64,6 +63,58 @@ class CategoriesController < ApplicationController
       format.html { redirect_to posts_url }
       format.json { head :no_content }
     end
+  end
+
+  # just for nominees
+  def new_nominee
+    @nominee = Nominee.new
+    logger.debug '->> new_nominee'
+    @@category_id = params[:category_id]
+  end
+
+  def create_nominee
+    @show_topbar = true
+    @nominee = Nominee.create(nominee_params.merge!(category_id: @@category_id))
+
+    logger.debug "--> nominee_params #{nominee_params.merge!(category_id: @@category_id)}"
+
+    respond_to do |format|
+      if @nominee.save
+        format.json { head :no_content }
+        format.js
+        format.html
+      else
+        format.json { render json: @nominee.errors.full_messages, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_nominee
+  end
+
+  def delete_nominee
+  end
+
+  def destroy_nominee
+    #@nominee.destroy
+    @nominee = Nominee.find_by(id: params[:nominee_id])
+    Nominee.find_by(id: params[:nominee_id]).destroy
+    respond_to do |format|
+      format.js { render layout: false }
+      format.html { redirect_to posts_url }
+      format.json { head :no_content }
+    end
+  end
+
+  def show_nominee
+  end
+
+  def set_nominee
+    @nominee = Nominee.find(params[:id])
+  end
+
+  def nominee_params
+    params.require(:nominee).permit(:name, :description, :id, :image_url)
   end
 
   private

@@ -20,21 +20,28 @@ Rails.application.routes.draw do
 
   get "/dashboard", to: 'dashboard#index'
 
-  #get "/category/[:id]", to: 'category#index'
   get "/categories", to: "categories#index"
+
 
 
 
 resources :awards
 
-resources :categories
-
-resources :nominees do
-  collection do
-    get :bet
-    get :unbet
+resources :categories do
+  member do
+    get 'new_nominee'
+    put 'update_nominee'
+    delete 'destroy_nominee'
+    post 'create_nominee'
   end
 end
+
+
+
+
+
+
+
 
 
 
