@@ -31,22 +31,20 @@
       <%= render :partial => 'nominee', :collection => @nominees = Nominee.where(category_id: category.id) %>
 
       <% if current_user.admin %>
-      <div class="small-12 large-expand medium-expand columns align-middle" style="background-color:#f9f9f9;border-radius:0.7em; margin:0.4em; max-width:250px;text-align:center;min-height:360px;vertical-align:middle;">
+      <div class="small-12 large-expand medium-expand columns" style="">
+        <div>
+          <!--<%= link_to "Add", edit_category_path(category), remote: true, :class => 'button' %>-->
+          <!--<a style="border-radius:100em;" href="#" class="button small radius large"><i  class="fi-plus"></i></a>-->
+          <%= link_to new_nominee_category_path(category.id,:category_id => category.id), remote: true, :class => "button large" ,:style => "border-radius:100em;vertical-align:middle;"    do %>
+          <i class="fi-plus"></i>
+          <% end %>
 
-            <!--<%= link_to "Add", edit_category_path(category), remote: true, :class => 'button' %>-->
-            <!--<a style="border-radius:100em;" href="#" class="button small radius large"><i  class="fi-plus"></i></a>-->
-            <%= link_to new_nominee_category_path(category.id,:category_id => category.id), remote: true, :class => "button large" ,:style => "border-radius:100em;"    do %>
-            <i class="fi-plus"></i>
-            <% end %>
-
-          </div>
+        </div>
+      </div>
 
       <% end %>
 
     </div>
-
-
-
 
     <%= render :partial => 'dialog_nominee' %>
 
