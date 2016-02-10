@@ -1,4 +1,4 @@
-<div id="category_<%= category.id%>" class="row" style='margin-bottom:3.2em;'>
+<div id="category_<%= category.id%>" class="row" style='margin-bottom:3.7em;'>
 
   <div class="small-12 small-centered columns">
 
@@ -18,20 +18,20 @@
     </div>
     <div class="row">
       <div class="small-12 columns">
-        <p><%= category.description %>
-        </p>
+        <h4 class="subheader"><%= category.description %>
+        </h4>
       </div>
     </div>
 
     <!-- nominees -->
     <div id="new_nominee"></div>
 
-    <div id="nominees" class="row align-stretch">
+    <div id="nominees" class="row align-stretch align-middle">
 
       <%= render :partial => 'nominee', :collection => @nominees = Nominee.where(category_id: category.id) %>
 
       <% if current_user.admin %>
-      <div class="small-12 large-expand medium-expand columns">
+      <div class="small-12 large-expand medium-expand columns align-middle" style="background-color:#f9f9f9;border-radius:0.7em; margin:0.4em; max-width:250px;text-align:center;min-height:360px;vertical-align:middle;">
 
             <!--<%= link_to "Add", edit_category_path(category), remote: true, :class => 'button' %>-->
             <!--<a style="border-radius:100em;" href="#" class="button small radius large"><i  class="fi-plus"></i></a>-->
