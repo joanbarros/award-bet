@@ -1,4 +1,7 @@
-<%= form_for(@nominee, :url => url_for(:controller => 'categories', :action => 'create_nominee'), remote: true, :html=> {:role => "form"}) do |f| %>
+<%= form_for(@nominee, :url => url_for(:controller => 'categories',
+           :action =>  @nominee.new_record? ? "create_nominee" : "update_nominee" ),
+           :method => @nominee.new_record? ? "post" : "put",
+           remote: true,  :html=> {:role => "form"}) do |f| %>
 
 <div id="error_explanation" style="font-size:0.8em;">
 </div>

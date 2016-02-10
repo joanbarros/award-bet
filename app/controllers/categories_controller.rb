@@ -6,6 +6,9 @@ class CategoriesController < ApplicationController
   @@award_id = 0
   @@category_id = 0
 
+  @@updating_nominee = false
+  @@nominee = nil
+
   def index
     @show_topbar = true
     @award_name = params[:award_name]
@@ -29,6 +32,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
+
     @show_topbar = true
     @category = Category.create(category_params.merge!(award_id: @@award_id))
     respond_to do |format|
@@ -67,12 +71,14 @@ class CategoriesController < ApplicationController
 
   # just for nominees
   def new_nominee
+    @@updating_nominee = false
     @nominee = Nominee.new
     logger.debug '->> new_nominee'
     @@category_id = params[:category_id]
   end
 
   def create_nominee
+    @@updating_nominee = false
     @show_topbar = true
     @nominee = Nominee.create(nominee_params.merge!(category_id: @@category_id))
 
@@ -89,14 +95,38 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def edit_nominee
+    @nominee = Nominee.find_by(id: params[:nominee_id])
+  #    @@nominee = Nominee.find_by(id: params[:nominee_id])
+  end
+
   def update_nominee
+
+    respond_to do |format|
+
+      logger.debug "->-> params #{params}"
+      logger.debug "->-> nominee params #{nominee_params}"
+
+      @nominee = Nominee.find_by(id: params[:id])
+
+      logger.debug "->->nominee_id #{@nominee.id}"
+      #nominee_attributes = Hash['id', params[:nominee_id],'name', params[:nominee_name],'description', params[:nominee_description],'image_url', params[:nominee_image_url]]nominee_attributes
+
+      if @nominee.update(nominee_params.merge!(id: params[:id]))
+        format.json { head :no_content }
+        format.js
+      else
+        format.json { render json: @nominee.errors.full_messages, status: :unprocessable_entity }
+      end
+    end
+
   end
 
   def delete_nominee
   end
 
   def destroy_nominee
-    #@nominee.destroy
+    # @nominee.destroy
     @nominee = Nominee.find_by(id: params[:nominee_id])
     Nominee.find_by(id: params[:nominee_id]).destroy
     respond_to do |format|
@@ -114,8 +144,10 @@ class CategoriesController < ApplicationController
   end
 
   def nominee_params
-    params.require(:nominee).permit(:name, :description, :id, :image_url)
+
+      params.require(:nominee).permit(:name, :description, :id, :image_url)
   end
+
 
   private
 

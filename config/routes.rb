@@ -30,7 +30,9 @@ resources :awards
 resources :categories do
   member do
     get 'new_nominee'
+    put 'edit_nominee'
     put 'update_nominee'
+    patch 'edit_nominee'
     delete 'destroy_nominee'
     post 'create_nominee'
   end

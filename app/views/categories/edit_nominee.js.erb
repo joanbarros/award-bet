@@ -1,3 +1,3 @@
-$('#create_update_modal_title').html("Edit Category");
-$('#create_update_modal_content').html('<%= j render("form") %>');
+$('#create_update_modal_title').html("Edit Nominee");
+$('#create_update_modal_content').html('<%= j render("form_nominee", :collection => @nominees = Nominee.where(id: params[:nominee_id])) %>');
 $('#create_update_modal').foundation('open');

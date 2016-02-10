@@ -1,5 +1,6 @@
+<% logger.debug ">>>>>@nominee #{nominee.inspect}" %>
 <% if nominee.nil? == false %>
-<div id="nominee_<%= nominee.id %>" class="column small-4" style="background-color:#f9f9f9;border-radius:1em;">
+<div id="nominee_<%= nominee.id %>" class="column small-4" style="background-color:#f9f9f9;border-radius:1em; margin:0.4em;">
   <div class="row">
     <div class="small-12 small-centered columns" style="text-align:center">
 
@@ -13,7 +14,7 @@
     </div>
     <div class="row">
       <div class="small-12 columns small-centered" style="text-align:center">
-        <h5><%= nominee.name %></h3>
+        <h4><%= nominee.name %></h4>
       </div>
     </div>
 
@@ -28,7 +29,12 @@
         </button>-->
 
         <% if current_user.admin %>
-        <%= link_to destroy_nominee_category_path(nominee), remote: true, :class => 'button tiny' do %>
+        <%= link_to edit_nominee_category_path(nominee.id,:nominee_id => nominee.id,
+                                                            :nominee_name => nominee.name,
+                                                            :nominee_description => nominee.description,
+                                                            :nominee_image_url => nominee.image_url),
+                                                            remote: true,
+                                                            :method => :put, :class => 'button tiny' do %>
         <i class="fi-pencil"></i>
         <% end %>
         <%= link_to destroy_nominee_category_path(nominee.id,:nominee_id => nominee.id), remote: true, :method => :delete , data: {confirm: "Are you sure"}, :class => "button hollow alert tiny" do%>

@@ -28,7 +28,7 @@
 
     <div id="nominees" class="row">
 
-      <%= render :partial => 'nominee', :collection => @nominees =Nominee.where(category_id: category.id) %>
+      <%= render :partial => 'nominee', :collection => @nominees = Nominee.where(category_id: category.id) %>
 
       <% if current_user.admin %>
       <div class="column small-4">
