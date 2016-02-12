@@ -1,0 +1,11 @@
+$('#create_update_modal').foundation('close');
+
+
+//hide the bet button for the nominee
+$('#button_place_bet_<%= @bet.nominee_id %>').addClass('hide');
+$('#button_edit_bet_<%= @bet.nominee_id %>').removeClass('hide');
+$('#button_unplace_bet_<%= @bet.nominee_id %>').removeClass('hide');
+$('#your_bet_nominee_<%= @bet.nominee_id %>').html('$<%= @bet.amount %>');
+
+
+//restore the buttons for all the other nominee_params

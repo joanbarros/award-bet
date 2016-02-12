@@ -9,6 +9,8 @@ class CategoriesController < ApplicationController
   @@updating_nominee = false
   @@nominee = nil
 
+  @@nominee_id = 0
+
   def index
     @show_topbar = true
     @award_name = params[:award_name]
@@ -17,7 +19,7 @@ class CategoriesController < ApplicationController
     # @categories = Category.find_each award_id: (params[:award_id]).to_i
     # @categories = Category.all if @categories.nil?
 
-    @nominees = Nominee.where(category_id: @categories.pluck(:id))
+    @nominees = Nominee.where(category_id: @categories.pluck(:id)).joins(:bets)
 
     logger.debug ">>-->> @nominees = #{@nominees}"
   end
@@ -144,9 +146,44 @@ class CategoriesController < ApplicationController
   end
 
   def nominee_params
-
       params.require(:nominee).permit(:name, :description, :id, :image_url)
   end
+
+# end nominees
+
+
+# bets
+ def new_bet
+   @bet = Bet.new
+   @@nominee_id = params[:nominee_id]
+ end
+
+
+ def create_bet
+   @show_topbar = true
+
+   @bet = Bet.create(bet_params.merge!(nominee_id: @@nominee_id).merge!(user_id:current_user.id))
+
+   respond_to do |format|
+     if @bet.save
+       format.json { head :no_content }
+       format.js
+       format.html
+     else
+       format.json { render json: @bet.errors.full_messages, status: :unprocessable_entity }
+     end
+   end
+ end
+
+ def edit_bet
+ end
+
+ def update_bet
+ end
+
+ def destroy_bet
+ end
+# end bets
 
 
   private
@@ -158,4 +195,9 @@ class CategoriesController < ApplicationController
   def category_params
     params.require(:category).permit(:name, :description, :id, :award_id)
   end
+
+ def bet_params
+   params.require(:bet).permit(:id, :amount)
+ end
+
 end

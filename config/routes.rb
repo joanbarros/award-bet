@@ -27,14 +27,27 @@ Rails.application.routes.draw do
 
 resources :awards
 
+
+#this could be improved on the future...
 resources :categories do
   member do
+
     get 'new_nominee'
     put 'edit_nominee'
     put 'update_nominee'
     patch 'edit_nominee'
     delete 'destroy_nominee'
     post 'create_nominee'
+
+    get 'new_bet'
+    put 'edit_bet'
+    patch 'edit_bet'
+    put 'update_bet'
+    patch 'update_bet'
+    delete 'destroy_bet'
+    post 'create_bet'
+
+
   end
 end
 

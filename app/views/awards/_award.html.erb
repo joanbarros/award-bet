@@ -37,19 +37,23 @@
 
 
     <div class="row">
-      <div id="days_left_award" class="small-8 columns">
-        <p>
-          closing date:
-          <%= award.closing_date %></p>
+      <div id="days_left_award" class="small-6 columns">
+        <h5>
+          Closing date:
+          <%= award.closing_date.strftime("%B %d, %Y at %I:%M %P") %> </h5>
+      </div>
+
+      <div class="small-2 columns">
+      <h5><%=  distance_of_time_in_words(award.closing_date, Date.today) %> left</h5>
       </div>
       <div id="pool_award" class="small-2 columns">
-        Pool: $0.00
+        <h5>Pool: $0.00</h5>
       </div>
       <div class="small-2 columns">
         <% if award.active %>
-        <span class="success round label">open</span>
+        <span class="success round label"><h6>open</h6></span>
       <% else %>
-        <span class="alert round label">closed</span>
+        <span class="alert round label"><h6>closed</h6></span>
         <% end %>
 
       </div>
