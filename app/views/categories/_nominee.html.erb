@@ -1,13 +1,20 @@
 <% if nominee.nil? == false %>
-<div id="nominee_<%= nominee.id %>" class="small-12 large-expand medium-expand columns" style="background-color:#f9f9f9;border-radius:0.7em; margin:0.4em; max-width:250px;max-height:360px;">
 
+<div id="nominee_<%= nominee.id %>" class="small-12 large-expand medium-expand columns"
+  style="background-color:#f9f9f9;border-radius:0.7em; margin:0.4em;
+  max-width:250px;max-height:360px;
+  <%= border_color_nominee( (nominee.bets.where(user_id:current_user.id)[0].nil? ? nil : nominee.bets.where(user_id:current_user.id)[0].amount) , nominee.winner    ) %>;">
   <div class="row">
 
-    <div class="column small-12" style="text-align:center;" data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover='false' tabindex=1 title="<%= nominee.name + ", " + nominee.description %>">
+    <div class="column small-12" style="text-align:center;" data-tooltip aria-haspopup="true"
+    class="has-tip" data-disable-hover='false' tabindex=1 title="<%= nominee.name + ", " + nominee.description %>">
       <% if nominee.image_url.nil? || nominee.image_url.empty? %>
-        <img style="height:auto; width:100px; margin-top:1em;" class="thumbnail" src="https://upload.wikimedia.org/wikipedia/en/e/ee/Unknown-person.gif" alt="nomee name">
+        <img style="height:auto; width:100px; margin-top:1em;"
+        class="thumbnail" src="https://upload.wikimedia.org/wikipedia/en/e/ee/Unknown-person.gif"
+        alt="nomee name">
       <% else %>
-       <img style="height:auto; width:100px; margin-top:1em; overflow: hidden;" class="thumbnail" src="<%= nominee.image_url %>" alt="nomee name">
+       <img style="height:auto; width:100px; margin-top:1em; overflow: hidden;"
+           class="thumbnail" src="<%= nominee.image_url %>" alt="nomee name">
       <% end %>
     </div>
 
@@ -16,13 +23,15 @@
   <div class="row">
     <div class="column small-12" style="text-align:center;">
       <p><%= truncate(nominee.name) %></p>
+
     </div>
   </div>
 
   <div class="row">
     <div class="column smal-12" style="text-align:center">
       <h6 class="">your bet:
-        <span id="your_bet_nominee_<%= nominee.id%>" style="color:green;">$ <%=  (nominee.bets[0].nil? || 0) ? 0.00.to_s : nominee.bets[0].amount %></span>
+        <span id="your_bet_nominee_<%= nominee.id%>" style="color:green;">
+          $ <%=  (  !nominee.bets.where(user_id:current_user.id)[0].nil? ) ?  nominee.bets.where(user_id:current_user.id)[0].amount : 0.00.to_s  %></span>
       </h6>
     </div>
   </div>
@@ -31,18 +40,12 @@
 
     <% if current_user.admin %>
     <div class="" style="margin-right:0.5em;">
-      <%= link_to edit_nominee_category_path(nominee.id,:nominee_id => nominee.id,
-                                                            :nominee_name => nominee.name,
-                                                            :nominee_description => nominee.description,
-                                                            :nominee_image_url => nominee.image_url),
-                                                            remote: true,
-                                                            :method => :put,
-                                                            :class => 'button tiny' do %>
+      <%= link_to edit_nominee_category_path(nominee.id,:nominee_id => nominee.id, :nominee_name => nominee.name, :nominee_description => nominee.description, :nominee_image_url => nominee.image_url, :nominee_winner => nominee.winner), remote: true, :method => :put, :class => 'button tiny' do %>
       <i class="fi-pencil"></i>
       <% end %>
     </div>
     <div class="">
-      <%= link_to destroy_nominee_category_path(nominee.id,:nominee_id => nominee.id), remote: true, :method => :delete , data: {confirm: "Are you sure?"}, :class => "button hollow alert tiny" do%>
+      <%= link_to destroy_nominee_category_path(nominee.id,:nominee_id => nominee.id), remote: true,  :method => :delete , data: {confirm: "Are you sure?"}, :class => "button hollow alert tiny" do%>
       <i class="fi-x"></i>
       <% end %>
     </div>
@@ -52,7 +55,9 @@
 
   <div class="row align-center">
 
-    <div id="button_place_bet_<%= nominee.id %>" class="row" style="margin-bottom:0px; text-align:center;">
+    <div id="button_place_bet_<%= nominee.id %>"
+      class="row <%=  (  !nominee.bets.where(user_id:current_user.id)[0].nil? ) ? 'hide' : '' %>"
+      style="margin-bottom:0px; text-align:center;">
       <div class="small-12 column">
         <%= link_to new_bet_category_path(nominee.id, :nominee_id => nominee.id), remote: true, :method => :get  do%>
         <button class="button ">Place Bet</button>
@@ -60,7 +65,8 @@
       </div>
     </div>
 
-    <div id="button_edit_bet_<%= nominee.id %>" class="row hide" style="margin-bottom:0px;text-align:center;">
+    <div id="button_edit_bet_<%= nominee.id %>"
+      class="row <%=  (  nominee.bets.where(user_id:current_user.id)[0].nil? ) ? 'hide' : '' %>" style="margin-bottom:0px;text-align:center;">
      <%= link_to edit_bet_category_path(nominee.id, :nominee_id => nominee.id), remote: true, :method => :put do %>
       <button class="button">Edit Bet</button>
      <% end %>

@@ -19,9 +19,10 @@ class CategoriesController < ApplicationController
     # @categories = Category.find_each award_id: (params[:award_id]).to_i
     # @categories = Category.all if @categories.nil?
 
-    @nominees = Nominee.where(category_id: @categories.pluck(:id)).joins(:bets)
+    #@nominees = Nominee.where(category_id: @categories.pluck(:id)).joins('LEFT OUTER JOIN bets ON bets.nominee_id = nominees.id and bets.user_id = ' + current_user.id.to_s)
 
-    logger.debug ">>-->> @nominees = #{@nominees}"
+
+
   end
 
   def show
@@ -75,7 +76,7 @@ class CategoriesController < ApplicationController
   def new_nominee
     @@updating_nominee = false
     @nominee = Nominee.new
-    logger.debug '->> new_nominee'
+
     @@category_id = params[:category_id]
   end
 
@@ -83,8 +84,6 @@ class CategoriesController < ApplicationController
     @@updating_nominee = false
     @show_topbar = true
     @nominee = Nominee.create(nominee_params.merge!(category_id: @@category_id))
-
-    logger.debug "--> nominee_params #{nominee_params.merge!(category_id: @@category_id)}"
 
     respond_to do |format|
       if @nominee.save
@@ -100,18 +99,18 @@ class CategoriesController < ApplicationController
   def edit_nominee
     @nominee = Nominee.find_by(id: params[:nominee_id])
   #    @@nominee = Nominee.find_by(id: params[:nominee_id])
+
   end
 
   def update_nominee
 
     respond_to do |format|
 
-      logger.debug "->-> params #{params}"
-      logger.debug "->-> nominee params #{nominee_params}"
+
 
       @nominee = Nominee.find_by(id: params[:id])
 
-      logger.debug "->->nominee_id #{@nominee.id}"
+
       #nominee_attributes = Hash['id', params[:nominee_id],'name', params[:nominee_name],'description', params[:nominee_description],'image_url', params[:nominee_image_url]]nominee_attributes
 
       if @nominee.update(nominee_params.merge!(id: params[:id]))
@@ -146,7 +145,7 @@ class CategoriesController < ApplicationController
   end
 
   def nominee_params
-      params.require(:nominee).permit(:name, :description, :id, :image_url)
+      params.require(:nominee).permit(:name, :description, :id, :image_url, :winner)
   end
 
 # end nominees
@@ -164,6 +163,13 @@ class CategoriesController < ApplicationController
 
    @bet = Bet.create(bet_params.merge!(nominee_id: @@nominee_id).merge!(user_id:current_user.id))
 
+   @nominees_ids_in_category =  Nominee.where(category_id: Nominee.where(id: @@nominee_id ).take.category_id ).pluck(:id)
+
+   @nominees_ids_in_category.delete( @@nominee_id.to_i)
+
+
+   Bet.where(:nominee_id => @nominees_ids_in_category, :user_id => current_user.id).delete_all
+
    respond_to do |format|
      if @bet.save
        format.json { head :no_content }
@@ -176,12 +182,43 @@ class CategoriesController < ApplicationController
  end
 
  def edit_bet
+
+  @bet = Bet.find_by(user_id: current_user.id, nominee_id: params[:nominee_id])
+
+
  end
 
  def update_bet
+
+   respond_to do |format|
+
+     @bet = Bet.find_by(nominee_id: params[:id], user_id:current_user.id)
+
+
+     if @bet.update(bet_params.merge!(id: params[:id]))
+       format.json { head :no_content }
+       format.js
+     else
+       format.json { render json: @bet.errors.full_messages, status: :unprocessable_entity }
+     end
+   end
+
+ end
+
+ def delete_bet
+   @bet = Bet.find_by(nominee_id: params[:id], user_id:current_user.id)
  end
 
  def destroy_bet
+   # @nominee.destroy
+  @bet = Bet.find_by(nominee_id: params[:id], user_id:current_user.id)
+   Bet.find_by(nominee_id: params[:id], user_id:current_user.id).destroy
+   @nominee_id =  params[:id]
+   respond_to do |format|
+     format.js { render layout: false }
+     format.html { redirect_to posts_url }
+     format.json { head :no_content }
+   end
  end
 # end bets
 

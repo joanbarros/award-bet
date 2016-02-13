@@ -1,1 +1,4 @@
-$('#nominee_<%= @nominee.id %>').hide();
+$('#your_bet_nominee_<%= @nominee_id%>').html('$ 0.0');
+$('#button_edit_bet_<%= @nominee_id  %>').addClass('hide');
+$('#button_unplace_bet_<%= @nominee_id  %>').addClass('hide');
+$('#button_place_bet_<%= @bet.nominee_id %>').removeClass('hide');

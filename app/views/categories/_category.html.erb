@@ -9,7 +9,8 @@
           <%= link_to edit_category_path(category), remote: true, :class => 'button tiny' do %>
           <i class="fi-pencil"></i>
           <% end %>
-          <%= link_to  category, remote: true, :method => :delete , data: {confirm: "Are you sure?"}, :class => "button hollow alert tiny" do%>
+          <%= link_to  category, remote: true, :method => :delete ,
+             data: {confirm: "Are you sure?"}, :class => "button hollow alert tiny" do%>
           <i class="fi-x"></i>
           <% end %>
           <% end %>
@@ -34,14 +35,19 @@
           <!--<%= link_to "Add", edit_category_path(category), remote: true, :class => 'button' %>-->
           <!--<a style="border-radius:100em;" href="#" class="button small radius large"><i  class="fi-plus"></i></a>-->
           <%= link_to new_nominee_category_path(category.id,:category_id => category.id), remote: true, :class => "button large" ,:style => "border-radius:100em;vertical-align:middle;"    do %>
-          <i class="fi-plus" data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover='false' tabindex=1 title="Create a new nominee"></i>
+          <i class="fi-plus" data-tooltip aria-haspopup="true" class="has-tip"
+           data-disable-hover='false' tabindex=1 title="Create a new nominee"></i>
           <% end %>
 
         </div>
       </div>
 
       <% end %>
-      <%= render :partial => 'nominee', :collection => @nominees = Nominee.where(category_id: category.id).joins('LEFT OUTER JOIN bets ON bets.nominee_id = nominees.id') %>
+
+
+
+      <%= render :partial => 'nominee',
+       :collection => @nominees = Nominee.where(category_id: category.id).joins('LEFT  JOIN bets ON bets.nominee_id = nominees.id and bets.user_id = ' + current_user.id.to_s).uniq %>
 
 
 
