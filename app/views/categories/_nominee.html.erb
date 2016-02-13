@@ -31,7 +31,7 @@
     <div class="column smal-12" style="text-align:center">
       <h6 class="">your bet:
         <span id="your_bet_nominee_<%= nominee.id%>" style="color:green;">
-          $ <%=  (  !nominee.bets.where(user_id:current_user.id)[0].nil? ) ?  nominee.bets.where(user_id:current_user.id)[0].amount : 0.00.to_s  %></span>
+           <%=  (  !nominee.bets.where(user_id:current_user.id)[0].nil? ) ? number_to_currency(nominee.bets.where(user_id:current_user.id)[0].amount) : '$0.00'  %></span>
       </h6>
     </div>
   </div>

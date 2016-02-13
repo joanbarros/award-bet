@@ -47,7 +47,8 @@
       <h5><%=  distance_of_time_in_words(award.closing_date, Date.today) %> left</h5>
       </div>
       <div id="pool_award" class="small-2 columns">
-        <h5>Pool: $0.00</h5>
+        <!--<h5>Pool: $0.00</h5>-->
+        <h5>Pool:  <%= number_to_currency Bet.where(:nominee_id => Nominee.where(:category_id => Category.where(:award_id =>award.id).pluck(:id)).pluck(:id)).sum(:amount).round(2)%></h5>
       </div>
       <div class="small-2 columns">
         <% if award.active %>
