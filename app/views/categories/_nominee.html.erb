@@ -59,7 +59,7 @@
       class="row <%=  (  !nominee.bets.where(user_id:current_user.id)[0].nil? ) ? 'hide' : '' %>"
       style="margin-bottom:0px; text-align:center;">
       <div class="small-12 column">
-        <%= link_to new_bet_category_path(nominee.id, :nominee_id => nominee.id), remote: true, :method => :get, :class=> "#{disabled_betting}"  do%>
+        <%= link_to new_bet_category_path(nominee.id, :nominee_id => nominee.id), remote: true, :method => :get, :class=> "#{disabled_betting(nominee.id)}"  do%>
         <button class="button ">Place Bet</button>
         <% end %>
       </div>
@@ -67,11 +67,11 @@
 
     <div id="button_edit_bet_<%= nominee.id %>"
       class="row <%=  (  nominee.bets.where(user_id:current_user.id)[0].nil? ) ? 'hide' : '' %>" style="margin-bottom:0px;text-align:center;">
-     <%= link_to edit_bet_category_path(nominee.id, :nominee_id => nominee.id), remote: true, :method => :put, :class=> "#{disabled_betting}" do %>
+     <%= link_to edit_bet_category_path(nominee.id, :nominee_id => nominee.id), remote: true, :method => :put, :class=> "#{disabled_betting(nominee.id)}" do %>
       <button class="button">Edit Bet</button>
      <% end %>
       <div id="button_unplace_bet_<%= nominee.id %>">
-        <%= link_to destroy_bet_category_path(nominee.id,:nominee_id => nominee.id), remote: true, :method => :delete , data: {confirm: "Are you sure?"}, :class => "button hollow alert #{disabled_betting}" do%>
+        <%= link_to destroy_bet_category_path(nominee.id,:nominee_id => nominee.id), remote: true, :method => :delete , data: {confirm: "Are you sure?"}, :class => "button hollow alert #{disabled_betting(nominee.id)}" do%>
         <i class="fi-x"></i>
         <% end %>
 

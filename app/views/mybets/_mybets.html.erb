@@ -1,7 +1,14 @@
+
 <tr>
-  <td><%= mybets.name %></td>
-  <td>eco</td>
-  <td>eco</td>
-  <td><span class="label success">win</span></td>
-  <td>eco</td>
+  <td><%= mybets.category_name %></td>
+  <td><%= mybets.nominee_name %></td>
+  <td><%= number_to_currency mybets.bet_amount %></td>
+  <td>
+    <% if mybets.nominee_winner %>
+      <span class="label success">win</span>
+      <% else %>
+      <span class="label secondary">loss</span>
+    <% end %>
+  </td>
+  <td><%=  number_to_currency mybets.money_share %></td>
 </tr>

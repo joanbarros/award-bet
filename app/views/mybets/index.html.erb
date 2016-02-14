@@ -6,13 +6,13 @@
 
 <div class="row align-middle" style="margin-bottom: 2em;">
 <div class="small-12 column">
-  <%= form_tag(controller:"mybets",action:"refresh" ,  method:"get", remote:"true") do %>
+  <%= form_tag("/mybets/refresh", method:"get" ) do %>
   <div class="row align-middle">
      <div class="column small-6">
 
 
-          <%= select_tag "award", options_from_collection_for_select(Award.all, 'id', 'name') %>
-      
+          <%= select_tag "award", options_from_collection_for_select(Award.all, 'id', 'name', @selection_id.to_i)  %>
+
     </div>
     <div class='column small-6'>
  <%= submit_tag "Refresh", class:"button" %>
@@ -23,7 +23,7 @@
 </div>
 
 <div class="row">
-  <table>
+  <table class="hoover">
     <thead>
       <tr>
         <th>Category</th>
@@ -34,8 +34,17 @@
       </tr>
     </thead>
     <tbody>
-      <%= render :partial=> 'mybets', :collection => @mybets %>
+      <%= render :partial=> 'mybets', :collection => @bets %>
     </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>total share: </td>
+        <td><%= number_to_currency @total_share %></td>
+      </tr>
+    </tfoot>
 
   </table>
 </div>

@@ -47,8 +47,7 @@
 
 
       <%= render :partial => 'nominee',
-       :collection => @nominees = Nominee.where(category_id: category.id).joins('LEFT  JOIN bets ON bets.nominee_id = nominees.id and bets.user_id = ' + current_user.id.to_s).uniq,
-       :locals => {disabled_betting: (!Award.where(id: Category.where(id: category.id).take.award_id).take.active) ? 'hide' : ''  }
+       :collection => @nominees = Nominee.where(category_id: category.id).joins('LEFT  JOIN bets ON bets.nominee_id = nominees.id and bets.user_id = ' + current_user.id.to_s).uniq
        %>
 
 
