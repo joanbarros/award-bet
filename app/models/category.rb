@@ -4,5 +4,6 @@ class Category < ActiveRecord::Base
   validates :description, presence: true, length: {minimum: 3}
 
   has_many :nominees
+  has_many :bets, :through => :nominees
   validates_associated :nominees
 end

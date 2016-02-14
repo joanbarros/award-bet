@@ -45,8 +45,8 @@
 // ---------
 
 $global-font-size: 100%;
-//$global-width: rem-calc(1200);
-$global-width: rem-calc(1000);
+$global-width: rem-calc(1200);
+//$global-width: rem-calc(1000);
 $global-lineheight: 1.5;
 $primary-color: #2199e8;
 $secondary-color: #777;
@@ -66,7 +66,8 @@ $global-margin: 1rem;
 $global-padding: 1rem;
 $global-weight-normal: normal;
 $global-weight-bold: bold;
-$global-radius: 0;
+//$global-radius: 0;
+$global-radius: 2;
 $global-text-direction: ltr;
 
 // 2. Breakpoints
@@ -483,7 +484,9 @@ $table-padding: rem-calc(8 10 10);
 $table-hover-scale: 2%;
 $table-row-hover: darken($table-background, $table-hover-scale);
 $table-row-stripe-hover: darken($table-background, $table-color-scale + $table-hover-scale);
-$table-striped-background: smart-scale($table-background, $table-color-scale);
+//$table-striped-background: smart-scale($table-background, $table-color-scale);
+$table-striped-background: #fff;
+
 $table-stripe: even;
 $table-head-background: smart-scale($table-background, $table-color-scale / 2);
 $table-foot-background: smart-scale($table-background, $table-color-scale);

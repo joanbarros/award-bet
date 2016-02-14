@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get '/configuration', to: 'configuration#index'
 
   get '/mybets', to: 'mybets#index'
+
+
   get '/mybets/refresh', to: 'mybets#refresh'
 
   get "login", to: 'login#index'
