@@ -1,0 +1,19 @@
+<% if current_user.admin %>
+<div class="row align-right" style="margin-top:3em;">
+  <div class="column  small-2">
+   <%=  link_to("Create Award", new_award_path, remote: true, class: "button success") %>
+   <!--<a data-open="create_new_award_reveal" class="button success large">Create Award</a>-->
+  </div>
+</div>
+<% end %>
+
+<div id="awards" class="row" style="margin-top:3em;">
+  <div class="column small-12">
+  <%= render @awards %>
+</div>
+</div>
+
+<div class="new_award">
+</div>
+
+<%= render 'dialog' %>

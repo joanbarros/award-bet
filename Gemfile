@@ -23,8 +23,24 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'foundation-rails'
+#gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'devise'
+gem 'paperclip', '~> 4.2'
+#Use ActiveModel has_secure_password
+gem 'bcrypt', '~> 3.1.7'
+
+gem 'jquery-turbolinks'
+
+
+gem 'foundation-icons-sass-rails'
+
+gem 'delayed_job_active_record'
+
+gem 'chartkick'
+gem 'groupdate'
+
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -44,4 +60,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-

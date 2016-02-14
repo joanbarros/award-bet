@@ -1,0 +1,41 @@
+<div class="row" style="margin-top:2em;margin-bottom:2em;">
+  <div class="small-12">
+    <h1>My Bets</h1>
+  </div>
+</div>
+
+<div class="row align-middle" style="margin-bottom: 2em;">
+<div class="small-12 column">
+  <%= form_tag(controller:"mybets",action:"refresh" ,  method:"get", remote:"true") do %>
+  <div class="row align-middle">
+     <div class="column small-6">
+
+
+          <%= select_tag "award", options_from_collection_for_select(Award.all, 'id', 'name') %>
+      
+    </div>
+    <div class='column small-6'>
+ <%= submit_tag "Refresh", class:"button" %>
+    </div>
+  </div>
+  <% end %>
+</div>
+</div>
+
+<div class="row">
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Nominee</th>
+        <th>My bet</th>
+        <th>Win?</th>
+        <th>Share</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render :partial=> 'mybets', :collection => @mybets %>
+    </tbody>
+
+  </table>
+</div>

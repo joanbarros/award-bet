@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="column">
+<%= form_for(@bet, :url => url_for(:controller => 'categories',
+           :action =>  @bet.new_record? ? "create_bet" : "update_bet" ),
+           :method => @bet.new_record? ? "post" : "put",
+           remote: true,  :html=> {:role => "form"}) do |f| %>
+
+<div id="error_explanation" style="font-size:0.8em;"></div>
+
+<label>
+  Amount
+  <%= f.number_field :amount , :step => 'any' %>
+</label>
+
+<div class="row">
+  <div class="small-offset-9 small-3 columns">
+    <%= f.submit "Place bet", :class => "button large success" %>
+  </div>
+</div>
+<% end %>
+</div>
+</div>

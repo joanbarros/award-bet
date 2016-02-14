@@ -1,9 +1,71 @@
 Rails.application.routes.draw do
+  get 'category/index'
+
+  devise_for :users
+  get 'login/index'
+
+  get 'mybets/index'
+
+  get 'awards/index'
+
+  get 'dashboard/index'
+
+  get 'categories/index'
+
+  get '/configuration', to: 'configuration#index'
+
+  get '/mybets', to: 'mybets#index'
+  get '/mybets/refresh', to: 'mybets#refresh'
+
+  get "login", to: 'login#index'
+
+  get "/dashboard", to: 'dashboard#index'
+
+  get "/categories", to: "categories#index"
+
+
+
+
+resources :awards
+
+
+#this could be improved on the future...
+resources :categories do
+  member do
+
+    get 'new_nominee'
+    put 'edit_nominee'
+    put 'update_nominee'
+    patch 'edit_nominee'
+    delete 'destroy_nominee'
+    post 'create_nominee'
+
+    get 'new_bet'
+    put 'edit_bet'
+    patch 'edit_bet'
+    put 'update_bet'
+    patch 'update_bet'
+    delete 'destroy_bet'
+    post 'create_bet'
+
+
+  end
+end
+
+
+
+
+
+
+
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'awards#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

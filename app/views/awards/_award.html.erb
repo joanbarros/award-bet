@@ -1,0 +1,68 @@
+<div id="award_<%= award.id%>" class="row" style="margin-bottom:3em;background-color:#f9f9f9;">
+
+  <div class="columns">
+    <div class="row">
+      <div class="columns small-12">
+
+        <!--<a href="awards/<%= award.id %>">
+          <h1><%= award.name %></h1>
+        </a>-->
+
+        <h1><%= link_to "#{award.name}", :controller => :categories, :action => :index, award_id: award.id, award_name: award.name %>
+
+        <% if current_user.admin %>
+          <%= link_to  edit_award_path(award), remote: true, :class => 'button tiny' do %>
+            <i class="fi-pencil"></i>
+          <% end %>
+
+          <%= link_to  award, remote: true, :method => :delete , data: {confirm: "Are you sure ?"}, :class => "button hollow alert tiny" do%>
+           <i class="fi-x"></i>
+          <% end %>
+
+        <% end %>
+
+        </h1>
+
+
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="columns small-12">
+        <h4 class="subheader"><%= award.description %>
+        </h4>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div id="days_left_award" class="small-6 columns">
+        <h5>
+          Closing date:
+          <%= award.closing_date.strftime("%B %d, %Y at %I:%M %P") %> </h5>
+      </div>
+
+      <div class="small-2 columns">
+      <h5><%=  distance_of_time_in_words(award.closing_date, Date.today) %> left</h5>
+      </div>
+      <div id="pool_award" class="small-2 columns">
+        <!--<h5>Pool: $0.00</h5>-->
+        <h5>Pool:  <%= number_to_currency Bet.where(:nominee_id => Nominee.where(:category_id => Category.where(:award_id =>award.id).pluck(:id)).pluck(:id)).sum(:amount).round(2)%></h5>
+      </div>
+      <div class="small-2 columns">
+        <% if award.active %>
+        <span class="success round label">open</span>
+      <% else %>
+        <span class="alert round label">closed</span>
+        <% end %>
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+</div>

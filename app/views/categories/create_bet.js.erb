@@ -1,0 +1,20 @@
+$('#create_update_modal').foundation('close');
+
+
+//hide the bet button for the nominee
+$('#button_place_bet_<%= @bet.nominee_id %>').addClass('hide');
+$('#button_edit_bet_<%= @bet.nominee_id %>').removeClass('hide');
+$('#button_unplace_bet_<%= @bet.nominee_id %>').removeClass('hide');
+$('#your_bet_nominee_<%= @bet.nominee_id %>').html('$<%= @bet.amount %>');
+
+//change the bets to 0 for all the nominees in the same category_id
+console.log('<%= @nominees_ids_in_category  %>')
+
+var ids = <%= @nominees_ids_in_category %>;
+
+for (var i =0; i < ids.length; i++){
+  $('#your_bet_nominee_' + ids[i]).html('$0.0');
+  $('#button_edit_bet_' + ids[i]).addClass('hide');
+  $('#button_place_bet_'+ ids[i]).removeClass('hide');
+}
+//restore the buttons for all the other nominee_params

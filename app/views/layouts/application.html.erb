@@ -1,14 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>OscarSport</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>
+    <%= content_for?(:title) ? yield(:title) : "Awards Bets" %>
+  </title>
+
+  <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+      <%= csrf_meta_tags %>
 </head>
+
 <body>
 
-<%= yield %>
+
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <ul class="dropdown menu" data-dropdown-menu>
+        <li class="menu-text">Awards Bets
+          <span class="alert round label">alfa</span>
+        </li>
+      </ul>
+    </div>
+
+
+
+
+
+
+    <% if @show_topbar %>
+      <div class="top-bar-right">
+        <ul class="menu">
+
+          <li>
+            <%= link_to "Awards", "/" %>
+          </li>
+
+          <li style="margin-right:5em;">
+            <%= link_to "My Bets", "/mybets" %>
+          </li>
+
+          <!--<li>
+            <%= link_to "Configuration", "/configuration" %>
+          </li>-->
+
+
+          <% if current_user.admin %>
+            <li>
+              <a href="/dashboard">Dashboard</a>
+            </li>
+          <% end %>
+
+
+         <li>
+         <span style="margin-right:1em;"><%= current_user.email %></span>
+         </li>
+
+          <li>
+            <!--<%= link_to "Logout", "/login", class: "alert button hollow"%>-->
+
+            <%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "alert button hollow tiny" %>
+          </li>
+
+
+        </ul>
+      </div>
+      <% end %>
+  </div>
+
+
+  <%= yield %>
+
+
 
 </body>
+
 </html>

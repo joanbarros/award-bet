@@ -1,0 +1,22 @@
+<div class="row">
+  <h1><%= @award_name %></h1>
+</div>
+
+<% if current_user.admin %>
+<div class="row" style="margin-top:2em;margin-bottom:1em;">
+  <div class="small-offset-9 small-3 columns">
+   <%=  link_to("Create Category", new_category_path, remote: true, class: "button success",  award_id: @award_id) %>
+   <!--<a data-open="create_new_award_reveal" class="button success large">Create Award</a>-->
+  </div>
+</div>
+<% end %>
+
+
+<div id="categories">
+  <%= render @categories %>
+</div>
+
+<div class="new_category">
+</div>
+
+<%= render 'dialog' %>

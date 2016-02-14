@@ -1,0 +1,3 @@
+$('#create_update_modal').foundation('close');
+<%= logger.debug "->->nominess after update #{Nominee.where( id: params[:id]).count}"%>
+$('#nominee_<%=  params[:id] %>').replaceWith('<%= j render :partial => "nominee", :collection => Nominee.where( id: params[:id]) %>');
