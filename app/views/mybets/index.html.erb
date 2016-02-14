@@ -1,35 +1,25 @@
-<div class="row">
+<div class="row" style="margin-top:2em;margin-bottom:2em;">
   <div class="small-12">
     <h1>My Bets</h1>
   </div>
 </div>
 
-<div class="row align-middle">
-  <div class="small-8 column">
-    <div class="row align-middle">
-      <div class="column shrink">
-    Award:
-  </div>
-  <div class="column">
-    <select>
-      <option value="Oscars 2016">Oscars 2016</option>
-      <option value="Premios Soberano 2016">Premios Soberano 2016</option>
-    </select>
-  </div>
-  </div>
+<div class="row align-middle" style="margin-bottom: 2em;">
+<div class="small-12 column">
+  <%= form_tag(controller:"mybets",action:"refresh" ,  method:"get", remote:"true") do %>
+  <div class="row align-middle">
+     <div class="column small-6">
 
-  </div>
-  <div class="small-4 column">
 
-    <div class="row align-middle">
-      <div class="shrink column">
-        Active:
-      </div>
-      <div class="column">
-        <input type="checkbox" checked="true" />
-      </div>
+          <%= select_tag "award", options_from_collection_for_select(Award.all, 'id', 'name') %>
+      
+    </div>
+    <div class='column small-6'>
+ <%= submit_tag "Refresh", class:"button" %>
     </div>
   </div>
+  <% end %>
+</div>
 </div>
 
 <div class="row">
@@ -37,10 +27,15 @@
     <thead>
       <tr>
         <th>Category</th>
+        <th>Nominee</th>
         <th>My bet</th>
         <th>Win?</th>
         <th>Share</th>
       </tr>
     </thead>
+    <tbody>
+      <%= render :partial=> 'mybets', :collection => @mybets %>
+    </tbody>
+
   </table>
 </div>

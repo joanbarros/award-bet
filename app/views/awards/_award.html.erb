@@ -1,4 +1,4 @@
-<div id="award_<%= award.id%>" class="row callout" style="margin-bottom:3em;">
+<div id="award_<%= award.id%>" class="row" style="margin-bottom:3em;background-color:#f9f9f9;">
 
   <div class="columns">
     <div class="row">
@@ -15,7 +15,7 @@
             <i class="fi-pencil"></i>
           <% end %>
 
-          <%= link_to  award, remote: true, :method => :delete , data: {confirm: "Are you sure"}, :class => "button hollow alert tiny" do%>
+          <%= link_to  award, remote: true, :method => :delete , data: {confirm: "Are you sure ?"}, :class => "button hollow alert tiny" do%>
            <i class="fi-x"></i>
           <% end %>
 
@@ -52,9 +52,9 @@
       </div>
       <div class="small-2 columns">
         <% if award.active %>
-        <span class="success round label"><h6>open</h6></span>
+        <span class="success round label">open</span>
       <% else %>
-        <span class="alert round label"><h6>closed</h6></span>
+        <span class="alert round label">closed</span>
         <% end %>
 
       </div>

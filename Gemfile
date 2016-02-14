@@ -37,6 +37,9 @@ gem 'foundation-icons-sass-rails'
 
 gem 'delayed_job_active_record'
 
+gem 'chartkick'
+gem 'groupdate'
+
 
 
 # Use Unicorn as the app server

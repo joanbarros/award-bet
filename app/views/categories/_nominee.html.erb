@@ -1,7 +1,7 @@
 <% if nominee.nil? == false %>
 
 <div id="nominee_<%= nominee.id %>" class="small-12 large-expand medium-expand columns"
-  style="background-color:#f9f9f9;border-radius:0.7em; margin:0.4em;
+  style="background-color:#f9f9f9;border-radius:0.0em; margin:0.4em;
   max-width:250px;max-height:360px;
   <%= border_color_nominee( (nominee.bets.where(user_id:current_user.id)[0].nil? ? nil : nominee.bets.where(user_id:current_user.id)[0].amount) , nominee.winner    ) %>;">
   <div class="row">
