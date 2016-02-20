@@ -39,7 +39,7 @@ gem 'delayed_job_active_record'
 
 gem 'chartkick'
 gem 'groupdate'
-
+gem 'puma'
 
 
 # Use Unicorn as the app server
